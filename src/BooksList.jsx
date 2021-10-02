@@ -5,7 +5,7 @@ export default function BooksList(props) {
   return (
     <>
       {props.books.map((book) => (
-        <BookItem book={book} key={book.id} />
+        <BookItem book={book} key={book.etag} />
       ))}
     </>
   );
