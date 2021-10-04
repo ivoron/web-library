@@ -1,10 +1,9 @@
-import React from "react";
-
 export function BookItem(props) {
   let { volumeInfo } = props.book;
 
   const openBook = (selfLink) => {
-    console.log(selfLink);
+    props.setUrl(selfLink);
+    props.history.push("/book/");
   };
 
   return (
@@ -19,8 +18,12 @@ export function BookItem(props) {
         <strong>{volumeInfo.title}</strong>
         <br />
         <span>{volumeInfo.authors?.join(", ")}</span>
-        <p>{volumeInfo.publisher && `Издательство: ${volumeInfo.publisher}`}</p>
-        <span>Категория: {volumeInfo.categories?.[0]}</span>
+        <span>
+          {volumeInfo.publisher && `Издательство: ${volumeInfo.publisher}`}
+        </span>
+        {volumeInfo.categories && (
+          <span>Категория: {volumeInfo.categories[0]}</span>
+        )}
       </div>
     </div>
   );

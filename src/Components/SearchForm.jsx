@@ -4,12 +4,15 @@ import { useState } from "react";
 
 export function SearchForm(props) {
   const [searchQuery, setSearchQuery] = useState("");
-  let searchBook = (e) => {
+  const searchBook = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       setSearchQuery("");
       props.fetchBooks(searchQuery);
     }
+  };
+  const handleChange = (e) => {
+    props.selectCategory(e.target.value);
   };
   return (
     <form className="searchForm" onSubmit={searchBook}>
@@ -21,14 +24,14 @@ export function SearchForm(props) {
       ></input>
       <button className="myBotton">Найти</button>
       <div>
-        <select>
-          <option>all</option>
-          <option>art</option>
-          <option>biography</option>
-          <option>computers</option>
-          <option>history</option>
-          <option>medicall</option>
-          <option>poetry</option>
+        <select onChange={handleChange}>
+          <option value="All">все</option>
+          <option value="Art">искусство</option>
+          <option value="Biography">биография</option>
+          <option value="Computers">компъютеры</option>
+          <option value="History">история</option>
+          <option value="Medicall">медицина</option>
+          <option value="Poetry">поэзия</option>
         </select>
 
         <input

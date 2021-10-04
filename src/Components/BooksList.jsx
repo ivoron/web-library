@@ -5,7 +5,12 @@ export default function BooksList(props) {
   return (
     <>
       {props.books.map((book) => (
-        <BookItem book={book} key={book.etag} />
+        <BookItem
+          history={props.history}
+          book={book}
+          key={book.etag}
+          setUrl={props.setUrl}
+        />
       ))}
     </>
   );

@@ -1,110 +1,36 @@
-import { action, makeObservable, observable } from "mobx";
+import { action, makeObservable } from "mobx";
+import { observable } from "mobx";
 
 class BookStore {
-  URL = "https://www.googleapis.com/books/v1/volumes";
-  API_KEY = "AIzaSyB46Sfp1ZdlvAUrEhfvtcH3GLI9plzOaXU";
-  answer = "";
-  searchQyery = "";
-  intitle = "intitle:";
-  inauthor = "inauthor:";
-  searchByAuthors = false;
-  totalItems = 0; //66
-  startIndex = 0;
-  maxResults = 30;
-  currentPage = 1; //3
-  hasNextPage = false;
-  isLoadMore = false; // button
-  isFetching = false;
-  orderBy = "relevance"; //[, "newest"];
-  //language = ["ru", "en", "fr", "it", "de", "ua"]; //volumeInfo.language;
-  categories = [
-    "art",
-    "biography",
-    "computers",
-    "history",
-    "medical",
-    "poetry",
-  ];
-  //volumeInfo.categories "Fiction" "History"
-  books = [];
   constructor() {
     makeObservable(this, {
-      answer: observable,
-      searchQyery: observable,
-      searchByAuthors: observable,
-      totalItems: observable,
-      startIndex: observable,
-      currentPage: observable,
-      isLoadMore: observable,
-      hasNextPage: observable,
-      orderBy: observable,
+      book: observable,
+      URL: observable,
       isFetching: observable,
-      books: observable,
-      fetchBooks: action,
-      loadMoreBooks: action,
-      showNextPage: action,
-      selectBy: action,
+      setUrl: action,
+      fetchCurrentBook: action,
     });
   }
+  URL = "";
+  error = "";
+  isFetching = false;
+  book = {};
 
-  fetchBooks = async (searchQyery, moreBooks = false) => {
-    if (!moreBooks) {
-      this.hasNextPage = false;
-      this.startIndex = 0;
-      this.currentPage = 1;
-    }
-    this.searchQyery = searchQyery.split(" ").join("+");
-    let totalUrl = `${this.URL}?q=${
-      this.searchByAuthors ? this.inauthor : this.intitle
-    }${this.searchQyery}&startIndex=${this.startIndex}&maxResults=${
-      this.maxResults
-    }&orderBy=${this.orderBy}&key=${this.API_KEY}`;
-    console.log(totalUrl);
+  setUrl = (url) => {
+    this.URL = url;
+    this.fetchCurrentBook();
+  };
+  fetchCurrentBook = async () => {
+    this.isFetching = true;
     try {
-      this.isFetching = true;
-      let searChedBooks = await fetch(totalUrl);
-      if (searChedBooks.ok) {
-        let fetchedBooks = await searChedBooks.json();
-        this.totalItems = fetchedBooks.totalItems;
-        if (this.totalItems > 0) {
-          // console.log(this.books.map((book) => book.volumeInfo.categories));
-          this.answer = `Найдено ${this.totalItems} книг(и)`;
-        } else {
-          this.answer = `По запросу ${this.searchQyery} книги не найдены`;
-        }
-        if (this.currentPage === 1) {
-          this.books = fetchedBooks.items;
-        } else if (this.hasNextPage) {
-          this.books.push(...fetchedBooks.items);
-        }
-      }
-      this.showNextPage();
-      this.isFetching = false;
+      let currentBook = await fetch(this.URL);
+      this.book = await currentBook.json();
     } catch (e) {
-      console.log(e);
+      console.log(e, "error");
+      this.error = "Не удалось загрузить книгу";
+    } finally {
+      this.isFetching = false;
     }
-  };
-  loadMoreBooks = () => {
-    if (this.startIndex === 0) {
-      this.startIndex = this.maxResults + 1;
-    } else {
-      this.startIndex += this.maxResults;
-    }
-    this.currentPage += 1;
-    this.fetchBooks(this.searchQyery, true);
-  };
-  showNextPage = () => {
-    if (this.totalItems > 30) {
-      this.hasNextPage = true;
-      if (this.maxResults * this.currentPage > this.totalItems) {
-        this.hasNextPage = false;
-      }
-    }
-    console.log(this.books);
-  };
-  selectBy = (option) => {
-    this.orderBy = option;
-    this.fetchBooks(this.searchQyery);
   };
 }
 export default BookStore;
