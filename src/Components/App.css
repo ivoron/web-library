@@ -21,11 +21,16 @@
 .App-header h2 {
   margin: 0;
 }
+.searchForm {
+  margin: auto;
+}
 .container {
+  display: flex;
   align-items: center;
   margin: 0 auto;
   background: white;
   min-height: 85vh;
+  flex-direction: column;
 }
 .book__page {
   margin: 0 40px;
@@ -67,17 +72,18 @@
 }
 @media screen and (max-width: 730px) {
   .container {
-    display: block;
+    display: flex;
     margin: 0 auto;
   }
 }
 @media screen and (max-width: 500px) {
   .container {
-    display: block;
+    display: flex;
     width: 100%;
     margin: 0 auto;
   }
-  .book__page {
+  .searchForm {
+    margin-top: 20%;
   }
   .bookCard {
     display: block;
@@ -92,7 +98,7 @@
     justify-content: center;
   }
   .album img {
-    width: 70%;
+    width: 200px;
   }
   .bookImage {
     display: flex;
@@ -120,6 +126,7 @@
 
 .lds-facebook {
   display: inline-block;
+  /* margin-bottom: 15%; */
   justify-content: center;
   position: relative;
   width: 80px;

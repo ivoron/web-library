@@ -21,16 +21,8 @@ const Main = inject(
             fetchBooks={libraryStore.fetchBooks}
             selectBy={libraryStore.selectBy}
             selectCategory={libraryStore.selectCategory}
+            libraryStore={libraryStore}
           />
-          {libraryStore.isFetching ? (
-            <div className="lds-facebook">
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-          ) : (
-            <div>{libraryStore.answer}</div>
-          )}
           {libraryStore.totalItems > 0 && (
             <BooksList
               history={props.history}

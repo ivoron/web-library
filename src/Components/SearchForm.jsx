@@ -51,6 +51,15 @@ export function SearchForm(props) {
         />
         <label htmlFor="newest">newest</label>
       </div>
+      {props.libraryStore.isFetching ? (
+        <div className="lds-facebook">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      ) : (
+        <div>{props.libraryStore.answer}</div>
+      )}
     </form>
   );
 }

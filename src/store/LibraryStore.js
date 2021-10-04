@@ -69,14 +69,15 @@ class LibraryStore {
         } else {
           this.answer = `По запросу ${this.searchQyery} книги не найдены`;
         }
+        this.isFetching = false;
       }
       this.showNextPage();
       this.selectCategory(this.sortedBy);
-      this.isFetching = false;
     } catch (e) {
       this.answer = `Не удалось загрузить результаты поиска...`;
       console.log(e);
     } finally {
+      this.isFetching = false;
     }
   };
   loadMoreBooks = () => {
