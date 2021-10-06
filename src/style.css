@@ -1,3 +1,16 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
 .App {
   text-align: center;
   align-items: center;
@@ -6,7 +19,7 @@
 }
 .App-header {
   background-color: #63676e;
-  display: flex;
+  display: block;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
@@ -17,20 +30,47 @@
   text-decoration: none;
   color: white;
   font-weight: 500;
+  display: inline-block;
 }
 .App-header h2 {
   margin: 0;
 }
 .searchForm {
   margin: auto;
+  font-size: 15px;
+  min-width: 340px;
+}
+#search-label {
+  font-size: 26px;
+  font-weight: 500;
+}
+.search_panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+.search_panel > input {
+  margin-right: 10px;
+  height: 20px;
+}
+.search_bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.search_bottom select {
+  width: 150px;
+  height: 25px;
+  text-align: center;
 }
 .container {
   display: flex;
   align-items: center;
   margin: 0 auto;
   background: white;
-  min-height: 85vh;
   flex-direction: column;
+  height: 83vh;
 }
 .book__page {
   margin: 0 40px;
@@ -56,13 +96,14 @@
 }
 .book__discription {
   margin: 20px 0;
+  text-align: justify;
 }
 .bookvolumeInfo {
   text-align: right;
   padding-left: 50px;
 }
 .album img {
-  height: 250px;
+  height: 200px;
 }
 .bookvolumeInfo span {
   font-size: 16px;
@@ -115,8 +156,9 @@
   background: white;
   border-radius: 2px;
   border: 1px solid grey;
-  padding: 2px 4px;
-  margin: 10px;
+  padding: 4px 8px;
+  width: 60px;
+  margin-left: 10px;
   font-size: small;
   color: rgb(26, 10, 23);
 }
@@ -175,7 +217,7 @@
   animation: lds-spinner 1.2s linear infinite;
 }
 .lds-spinner div:after {
-  content: " ";
+  content: ' ';
   display: block;
   position: absolute;
   top: 3px;

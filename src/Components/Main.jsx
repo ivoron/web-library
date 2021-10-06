@@ -1,16 +1,15 @@
-import "./App.css";
-import { SearchForm } from "./SearchForm";
-import React from "react";
-import BooksList from "./BooksList";
-import { inject, observer } from "mobx-react";
-import { action } from "mobx";
+import SearchForm from './SearchForm'
+import React from 'react'
+import BooksList from './BooksList'
+import { inject, observer } from 'mobx-react'
+import { action } from 'mobx'
 
 const Main = inject(
-  "libraryStore",
-  "bookStore"
+  'libraryStore',
+  'bookStore'
 )(
   observer((props) => {
-    const { libraryStore } = props;
+    const { libraryStore } = props
     return (
       <div className="App">
         <header className="App-header">
@@ -48,8 +47,8 @@ const Main = inject(
         </div>
         <footer className="footer">footer</footer>
       </div>
-    );
+    )
   })
-);
+)
 
-export default Main;
+export default Main

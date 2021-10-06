@@ -1,5 +1,5 @@
-import React from "react";
-import { BookItem } from "./BookItem";
+import React from 'react'
+import { BookItem } from './BookItem'
 
 export default function BooksList(props) {
   return (
@@ -13,5 +13,5 @@ export default function BooksList(props) {
         />
       ))}
     </>
-  );
+  )
 }

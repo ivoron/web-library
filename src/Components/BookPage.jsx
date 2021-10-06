@@ -1,13 +1,13 @@
-import { inject } from "mobx-react";
-import { observer } from "mobx-react-lite";
-import React from "react";
-import { Link } from "react-router-dom";
+import { inject } from 'mobx-react'
+import { observer } from 'mobx-react-lite'
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-const BookPage = inject("bookStore")(
+const BookPage = inject('bookStore')(
   observer((props) => {
-    const { volumeInfo } = props.bookStore.book;
+    const { volumeInfo } = props.bookStore.book
     return (
-      <div className="container">
+      <div className="book_container">
         <header className="App-header">
           <h2>
             <Link to="/">На главную</Link>
@@ -42,21 +42,23 @@ const BookPage = inject("bookStore")(
                     <div className="bookvolumeInfo">
                       <h2>{volumeInfo.title}</h2>
                       <br />
-                      <span>{volumeInfo.authors?.join(", ")}</span>
+                      <span>{volumeInfo.authors?.join(', ')}</span>
                       <br />
                       <span>
-                        Категория: {volumeInfo.categories?.join(", ")}
+                        Категория: {volumeInfo.categories?.join(', ')}
                       </span>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="book__discription">{volumeInfo.description}</div>
+              <div className="book__discription">
+                <p>{volumeInfo.description}</p>
+              </div>
             </div>
           </>
         )}
       </div>
-    );
+    )
   })
-);
-export default BookPage;
+)
+export default BookPage
